@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('blog_categories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug', 100)->index();
+            $table->string('slug', 100)->unique();
             $table->string('banner')->nullable();
             $table->tinyInteger('is_published')->default(0)->index();
             $table->timestamps();

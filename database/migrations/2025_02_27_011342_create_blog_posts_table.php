@@ -14,13 +14,15 @@ return new class extends Migration
     {
         Schema::create('blog_posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained(app(User::class)->getTable())->nullOnDelete();
+            $table->bigInteger('user_id')->index();
             $table->string('title');
-            $table->string('slug', 100)->index();
+            $table->string('slug', 100)->unique();
             $table->timestamp('post_at')->nullable();
             $table->string('banner')->nullable();
             $table->longText('summary')->nullable();
-            $table->longText('body')->nullable();
+            $table->longText('body_html')->nullable();
+            $table->longText('body_json')->nullable();
+            $table->tinyInteger('is_using_builder')->default(0);
             $table->tinyInteger('is_published')->default(0)->index();
             $table->timestamps();
         });
