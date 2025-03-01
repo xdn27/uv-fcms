@@ -6,6 +6,8 @@ use App\Filament\Resources\BlogPostResource\Pages;
 use App\Filament\Resources\BlogPostResource\RelationManagers;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Models\BlogPostMetaTemplate;
+use App\Models\BlogPostType;
 use Filament\Forms;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\DatePicker;
@@ -37,6 +39,7 @@ class BlogPostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Blogging';
+    protected static ?int $navigationSort = 1;
     public static ?string $label = 'Post';
 
     public static function form(Form $form): Form
@@ -50,8 +53,30 @@ class BlogPostResource extends Resource
                         ->live(onBlur: true)
                         ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                     Textarea::make('summary')
-                        ->rows(5)
+                        ->rows(3)
                         ->columnSpanFull(),
+                    Grid::make(2)
+                        ->schema(function(Get $get){
+                            
+                            if(empty($get('type'))){
+                                return [];
+                            }
+
+                            $templates = BlogPostMetaTemplate::where('post_type', $get('type'))->get();
+                            if($templates->count() < 1){
+                                return [];
+                            }
+
+                            $fields = [];
+                            foreach($templates as $template){
+
+                                foreach($template->meta as $field => $default){
+                                    $fields[] = TextInput::make($field);
+                                }
+                            }
+                            
+                            return $fields;
+                        })->key('MetaPost'),
                     Toggle::make('is_using_builder')
                         ->label('Use Builder')
                         ->live()
@@ -71,6 +96,17 @@ class BlogPostResource extends Resource
                 Grid::make(1)->schema([
                     Section::make([
                         Toggle::make('is_published')->label('Publish'),
+                        Select::make('type')
+                            ->required()
+                            ->options(BlogPostType::where('is_active', 1)->pluck('name', 'id'))
+                            ->default(fn() => BlogPostType::where('is_default', 1)->first()->id)
+                            ->live()
+                            ->afterStateUpdated(function (Select $component){
+                                $section = $component->getContainer()->getComponent('MetaPost');
+                                if($section){
+                                    $section->getChildComponentContainer()->fill();
+                                }
+                            }),
                         TextInput::make('slug')->required(),
                         DatePicker::make('post_at')
                             ->required()
