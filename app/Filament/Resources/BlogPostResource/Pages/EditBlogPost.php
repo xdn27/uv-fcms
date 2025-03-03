@@ -28,17 +28,16 @@ class EditBlogPost extends EditRecord
 
     private function handleMetaSaving(BlogPost $record, array $data): void
     {
-        $metas = [];
+        $record->postMeta()->delete();
         if(isset($data['metas']['key'])){
             foreach($data['metas']['key'] as $i => $key){
-                $metas[] = [
+                $record->postMeta()->updateOrCreate([
                     'post_id' => $record->id,
-                    'key' => $key,
+                    'key' => $key
+                ], [
                     'value' => $data['metas']['value'][$i] ?? null
-                ];
+                ]);
             }
         }
-
-        $record->postMeta()->upsert($metas, ['post_id', 'key']);
     }
 }

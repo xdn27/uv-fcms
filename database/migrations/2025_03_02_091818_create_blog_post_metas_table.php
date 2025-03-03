@@ -12,12 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('blog_post_metas', function (Blueprint $table) {
-            $table->id();
             $table->bigInteger('post_id');
             $table->string('key', 100);
             $table->string('value')->nullable();
-            $table->timestamps();
-            $table->unique(['post_id', 'key']);
+            $table->primary(['post_id', 'key']);
         });
     }
 

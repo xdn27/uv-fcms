@@ -101,7 +101,34 @@ class BlogPostResource extends Resource
                             ->options(BlogPostType::where('is_active', 1)->pluck('name', 'id'))
                             ->default(fn() => BlogPostType::where('is_default', 1)->first()->id)
                             ->live()
-                            ->afterStateUpdated(function(Set $set, string $state){
+                            ->afterStateHydrated(function(Get $get, Set $set, ?string $state){
+                                if(empty($state)){
+                                    return;
+                                }
+
+                                $metas = BlogPostMeta::where('post_id', $get('id'))->get();
+                                if($metas->count() > 0){
+                                    foreach ($metas as $i => $meta){
+                                        $set('metas.key.'.$i, $meta->key);
+                                        $set('metas.value.'.$i, $meta->value);
+                                    }
+                                }else{
+                                    $template = BlogPostMetaTemplate::where('post_type', $state)->first();
+                                    if (!empty($template)) {
+                                        $if = 0;
+                                        foreach ($template->meta as $field => $default) {
+                                            $set('metas.key.'.$if, $field);
+                                            $set('metas.value.'.$if, $default);
+                                            $if++;
+                                        }
+                                    }
+                                }
+                            })
+                            ->afterStateUpdated(function(Set $set, ?string $state){
+                                if(empty($state)){
+                                    return;
+                                }
+
                                 $template = BlogPostMetaTemplate::where('post_type', $state)->first();
                                 if (!empty($template)) {
                                     $if = 0;
@@ -110,6 +137,9 @@ class BlogPostResource extends Resource
                                         $set('metas.value.'.$if, $default);
                                         $if++;
                                     }
+                                }else{
+                                    $set('metas.key', []);
+                                    $set('metas.value', []);
                                 }
                             }),
                         TextInput::make('slug')->required(),
