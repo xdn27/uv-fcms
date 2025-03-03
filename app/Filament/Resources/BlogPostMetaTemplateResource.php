@@ -47,8 +47,9 @@ class BlogPostMetaTemplateResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('created_at')
+                TextColumn::make('name')->searchable()->sortable(),
+                TextColumn::make('post_type')->searchable()->sortable(),
+                TextColumn::make('created_at')->sortable()
             ])
             ->filters([
                 //

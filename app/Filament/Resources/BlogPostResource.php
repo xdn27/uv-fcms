@@ -6,6 +6,7 @@ use App\Filament\Resources\BlogPostResource\Pages;
 use App\Filament\Resources\BlogPostResource\RelationManagers;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Models\BlogPostMeta;
 use App\Models\BlogPostMetaTemplate;
 use App\Models\BlogPostType;
 use Filament\Forms;
@@ -14,6 +15,7 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -63,20 +65,22 @@ class BlogPostResource extends Resource
                             }
 
                             $templates = BlogPostMetaTemplate::where('post_type', $get('type'))->get();
-                            if($templates->count() < 1){
-                                return [];
-                            }
-
                             $fields = [];
-                            foreach($templates as $template){
+                            foreach($templates as $it => $template){
 
+                                $if = 0;
                                 foreach($template->meta as $field => $default){
-                                    $fields[] = TextInput::make($field);
+                                    $fields[] = Hidden::make('metas'.$it.$if.'.key')->default($field);
+                                    $fields[] = TextInput::make('metas'.$it.$if.'.value')->label($field);
+
+                                    $if++;
                                 }
                             }
                             
                             return $fields;
-                        })->key('MetaPost'),
+                        })
+                        ->key('MetaPost')
+                        ->statePath('metas'),
                     Toggle::make('is_using_builder')
                         ->label('Use Builder')
                         ->live()
@@ -105,11 +109,13 @@ class BlogPostResource extends Resource
                                 $section = $component->getContainer()->getComponent('MetaPost');
                                 if($section){
                                     $section->getChildComponentContainer()->fill();
+                                    $this->form->fill(['metas' => []]);
                                 }
                             }),
                         TextInput::make('slug')->required(),
                         DatePicker::make('post_at')
                             ->required()
+                            ->default(now())
                             ->native(false),
                         Select::make('categories')
                             ->relationship('categories', 'title')
