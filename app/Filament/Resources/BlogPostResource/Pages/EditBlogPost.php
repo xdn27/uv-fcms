@@ -20,36 +20,25 @@ class EditBlogPost extends EditRecord
         ];
     }
 
-    protected function beforeSave(): void
-    {
-        $data = $this->form->getState();
-        // $this->record->metas = $data['metas'] ?? [];
-        unset($data['metas']);
-        $this->form->fill($data);
-    }
-
     protected function afterSave(): void
     {
         $data = $this->form->getState();
-        dd($data, $this->record);
         $this->handleMetaSaving($this->record, $data);
     }
 
     private function handleMetaSaving(BlogPost $record, array $data): void
     {
-        // dd($data);
-        $metas = collect($data['metas'] ?? [])
-        ->map(function ($meta) {
-            return [
-                'key' => $meta['key'],
-                'value' => $meta['value']
-            ];
-        });
+        $metas = [];
+        if(isset($data['metas']['key'])){
+            foreach($data['metas']['key'] as $i => $key){
+                $metas[] = [
+                    'post_id' => $record->id,
+                    'key' => $key,
+                    'value' => $data['metas']['value'][$i] ?? null
+                ];
+            }
+        }
 
-        // Clear existing metas
-        $record->metas()->delete();
-
-        // Create new metas
-        $record->metas()->createMany($metas->toArray());
+        $record->postMeta()->upsert($metas, ['post_id', 'key']);
     }
 }

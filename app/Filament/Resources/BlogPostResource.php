@@ -52,50 +52,46 @@ class BlogPostResource extends Resource
                     Hidden::make('user_id')->default(auth()->id()),
                     TextInput::make('title')
                         ->required()
+                        ->default('Test')
                         ->live(onBlur: true)
-                        ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                        ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                     Textarea::make('summary')
                         ->rows(3)
                         ->columnSpanFull(),
                     Grid::make(2)
-                        ->schema(function(Get $get){
-                            
-                            if(empty($get('type'))){
+                        ->schema(function (Get $get) {
+
+                            if (empty($get('type')) || empty($get('metas'))) {
                                 return [];
                             }
 
-                            $templates = BlogPostMetaTemplate::where('post_type', $get('type'))->get();
+                            $metas = $get('metas');
                             $fields = [];
-                            foreach($templates as $it => $template){
-
-                                $if = 0;
-                                foreach($template->meta as $field => $default){
-                                    $fields[] = Hidden::make('metas'.$it.$if.'.key')->default($field);
-                                    $fields[] = TextInput::make('metas'.$it.$if.'.value')->label($field);
-
-                                    $if++;
-                                }
+                            foreach ($metas['key'] as $i => $key) {
+                                $fields[] = Hidden::make('metas.key.' . $i)
+                                    ->default($key);
+                                $fields[] = TextInput::make('metas.value.' . $i)
+                                    ->label($key)
+                                    ->default($metas['value'][$i] ?? null);
                             }
-                            
+
                             return $fields;
-                        })
-                        ->key('MetaPost')
-                        ->statePath('metas'),
+                        }),
                     Toggle::make('is_using_builder')
                         ->label('Use Builder')
                         ->live()
                         ->columnSpanFull()
-                        ->afterStateUpdated(fn (Set $set, ?bool $state) => $state ? $set('body_html', null) : $set('body_json', null)),
+                        ->afterStateUpdated(fn(Set $set, ?bool $state) => $state ? $set('body_html', null) : $set('body_json', null)),
                     RichEditor::make('body_html')
                         ->label('Content')
                         ->default(null)
                         ->columnSpanFull()
-                        ->hidden(fn (Get $get): bool => $get('is_using_builder') != false),
+                        ->hidden(fn(Get $get): bool => $get('is_using_builder') != false),
                     Builder::make('body_json')
                         ->label('Content')
                         ->default(null)
                         ->columnSpanFull()
-                        ->hidden(fn (Get $get): bool => $get('is_using_builder') != true),
+                        ->hidden(fn(Get $get): bool => $get('is_using_builder') != true),
                 ])->columnSpan(8),
                 Grid::make(1)->schema([
                     Section::make([
@@ -105,11 +101,15 @@ class BlogPostResource extends Resource
                             ->options(BlogPostType::where('is_active', 1)->pluck('name', 'id'))
                             ->default(fn() => BlogPostType::where('is_default', 1)->first()->id)
                             ->live()
-                            ->afterStateUpdated(function (Select $component){
-                                $section = $component->getContainer()->getComponent('MetaPost');
-                                if($section){
-                                    $section->getChildComponentContainer()->fill();
-                                    $this->form->fill(['metas' => []]);
+                            ->afterStateUpdated(function(Set $set, string $state){
+                                $template = BlogPostMetaTemplate::where('post_type', $state)->first();
+                                if (!empty($template)) {
+                                    $if = 0;
+                                    foreach ($template->meta as $field => $default) {
+                                        $set('metas.key.'.$if, $field);
+                                        $set('metas.value.'.$if, $default);
+                                        $if++;
+                                    }
                                 }
                             }),
                         TextInput::make('slug')->required(),
@@ -121,8 +121,8 @@ class BlogPostResource extends Resource
                             ->relationship('categories', 'title')
                             ->multiple()
                             ->searchable()
-                            ->getSearchResultsUsing(fn (string $search): array => BlogCategory::where('title', 'like', "%{$search}%")->limit(5)->pluck('title', 'id')->toArray())
-                            ->getOptionLabelsUsing(fn (array $values): array => BlogCategory::whereIn('id', $values)->pluck('title', 'id')->toArray())
+                            ->getSearchResultsUsing(fn(string $search): array => BlogCategory::where('title', 'like', "%{$search}%")->limit(5)->pluck('title', 'id')->toArray())
+                            ->getOptionLabelsUsing(fn(array $values): array => BlogCategory::whereIn('id', $values)->pluck('title', 'id')->toArray())
                             ->preload()
                             ->saveRelationshipsUsing(function (BlogPost $post, $state) {
                                 $post->categories()->sync($state);

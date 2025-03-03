@@ -33,9 +33,14 @@ class BlogPost extends Model
         'metas' => 'array'
     ];
 
-    protected static function boot()
+    public $metas;
+
+    protected function metas(): Attribute
     {
-        parent::boot();
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => [],
+        );
     }
 
     public function categories(): BelongsToMany
@@ -43,7 +48,7 @@ class BlogPost extends Model
         return $this->belongsToMany(BlogCategory::class, app(BlogPostCategory::class)->getTable());
     }
 
-    public function metas(): HasMany
+    public function postMeta(): HasMany
     {
         return $this->hasMany(BlogPostMeta::class, 'post_id', 'id');
     }
