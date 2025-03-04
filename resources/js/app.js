@@ -1,8 +1,8 @@
-import './bootstrap';
-import './vendor';
+import './bootstrap.js';
+import './vendor.js';
 import './titan-slider/titan-slider.js';
 import './tera-lightbox/tera-lightbox.js';
-import './functions';
+import './functions.js';
 
 // $('#home-slider').titanSlider();
 

@@ -8,7 +8,6 @@ class Landing extends Component
 {
     public function render()
     {
-        sleep(5);
         return view('livewire.landing');
     }
 }

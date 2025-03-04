@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@source "../views";
+/* @import "tailwindcss";
+@source "../views"; */
 
 @import "../template/css/core.css";
 @import "../template/css/animsition.min.css";

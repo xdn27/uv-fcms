@@ -41,18 +41,18 @@
                                 </a>
                             </li>
                             <li class="col-1">
-                                <a wire:navigate href="{{ route('about') }}" class="nav-link">
+                                <a wire:navigate href="{{ route('about') }}" class="nav-link {{ Route::is('about') ? 'active' : '' }}">
                                     About
                                 </a>
                             </li>
                             <li class="col-1 col-offset-1">
-                                <a wire:navigate href="{{ route('portfolio') }}" class="nav-link">Portfolio</a>
+                                <a wire:navigate href="{{ route('portfolio') }}" class="nav-link {{ Route::is('portfolio') ? 'active' : '' }}">Portfolio</a>
                             </li>
                             <li class="col-1 col-offset-1">
-                                <a wire:navigate href="{{ route('blog') }}" class="nav-link">Journal</a>
+                                <a wire:navigate href="{{ route('blog') }}" class="nav-link {{ Route::is('blog') ? 'active' : '' }}">Journal</a>
                             </li>
                             <li class="col-1 col-offset-1">
-                                <a wire:navigate href="{{ route('contact') }}" class="nav-link">Contact</a>
+                                <a wire:navigate href="{{ route('contact') }}" class="nav-link {{ Route::is('contact') ? 'active' : '' }}">Contact</a>
                             </li>
                         </ul>
                     </nav>
