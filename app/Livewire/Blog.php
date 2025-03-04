@@ -4,11 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class Landing extends Component
+class Blog extends Component
 {
     public function render()
     {
-        sleep(5);
-        return view('livewire.landing');
+        return view('livewire.blog');
     }
 }

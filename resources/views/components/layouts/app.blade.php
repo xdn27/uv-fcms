@@ -1,21 +1,79 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{{ $title ?? 'UV' }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css'])
-        @endif
-    </head>
-    <body>
+    <title>{{ $title ?? 'UV' }}</title>
+
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+    @vite(['resources/css/app.css'])
+    @endif
+</head>
+
+<body>
+    <div id="wrapper" class="">
+        <div id="loader" class="fh" x-data x-show="$store.navigate.to !== null">
+            <section class="vcenter">
+                <div class="container">
+                    <div class="indicator"> <span class="number">0</span><span class="unit">%</span>
+                        <div class="loadbar">
+                            <div class="inner"></div>
+                        </div>
+                    </div>
+                    <div class="img-count"><span class="loaded"></span><span class="description"></span></div>
+                </div>
+            </section>
+        </div>
+        <header id="main-header">
+            <div class="container">
+                <div class="grid">
+                    <nav class="main-nav">
+                        <div class="responsive-nav">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                        <ul class="nav-links">
+                            <li class="col-1 brand">
+                                <a wire:navigate href="{{ route('landing') }}"><img alt="Peel" src="images/logo.svg" class="default">
+                                </a>
+                            </li>
+                            <li class="col-1">
+                                <a wire:navigate href="{{ route('about') }}" class="nav-link">
+                                    About
+                                </a>
+                            </li>
+                            <li class="col-1 col-offset-1">
+                                <a wire:navigate href="{{ route('portfolio') }}" class="nav-link">Portfolio</a>
+                            </li>
+                            <li class="col-1 col-offset-1">
+                                <a wire:navigate href="{{ route('blog') }}" class="nav-link">Journal</a>
+                            </li>
+                            <li class="col-1 col-offset-1">
+                                <a wire:navigate href="{{ route('contact') }}" class="nav-link">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
         {{ $slot }}
+    </div>
 
-        <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.js"></script> -->
-        @vite([
-            'resources/js/app.js',
-        ])
-    </body>
+    <script src="//unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.js"></script>
+
+    @vite([
+    'resources/js/app.js',
+    ])
+
+    @stack('js')
+
+</body>
+
 </html>

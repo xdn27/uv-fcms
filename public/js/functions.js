@@ -128,9 +128,9 @@
     }, 250);
   });
 
-  // init();
-  // autoSizeTextarea();
-  // initAccordion();
+  init();
+  autoSizeTextarea();
+  initAccordion();
 
   function init(){
 
