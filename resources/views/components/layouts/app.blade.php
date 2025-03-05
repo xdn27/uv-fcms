@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ $title ?? 'UV' }}</title>
+    <title>{{ $title ?? 'Luthfi Fariz' }}</title>
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css'])
@@ -75,7 +75,7 @@
     <script src="{{ asset('js/template/functions.js') }}"></script>
 
     @vite([
-        'resources/js/app.js',
+    'resources/js/app.js',
     ])
 
     @stack('js')
