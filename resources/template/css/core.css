@@ -7169,7 +7169,8 @@ body * {
 }
 
 .content-block, .list-block {
-  margin-bottom: 80px;
+  /* margin-bottom: 80px; */
+  margin-bottom: 26px;
 }
 
 .content img {

@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Fcore\Class\BlockSchema;
+use App\Fcore\Interface\BlockSchema as InterfaceBlockSchema;
 use App\Filament\Resources\PageResource\Pages;
 use App\Filament\Resources\PageResource\RelationManagers;
 use App\Models\Page;
@@ -25,28 +27,25 @@ class PageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Hidden::make('user_id')->default(auth()->id()),
                 Section::make([
-                    Toggle::make('is_published')->label('Publish'),
                     TextInput::make('title'),
-                    TextInput::make('slug')
-                ])->columnSpan(4),
+                    TextInput::make('slug'),
+                    Toggle::make('is_published')->label('Publish'),
+                ])->columns(2),
                 Section::make([
                     Grid::make(3)->schema([
-                        Builder::make('body_json.left')->blocks([
-                            Builder\Block::make('spacer')->schema([
-                                TextInput::make('text')
-                            ])
-                        ])->label(''),
-                        Builder::make('body_json.middle')->label(''),
-                        Builder::make('body_json.right')->label('')
+                        Builder::make('body_json.left')->blocks(BlockSchema::getList())->label(''),
+                        Builder::make('body_json.middle')->blocks([])->label(''),
+                        Builder::make('body_json.right')->blocks([])->label('')
                     ])
-                ])->columnSpan(8)
-            ])->columns(12);
+                ])
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
