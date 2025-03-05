@@ -129,3 +129,7 @@
         </div>
     </section>
 </div>
+
+@push('js')
+    
+@endpush

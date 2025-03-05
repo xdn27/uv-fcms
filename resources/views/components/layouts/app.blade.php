@@ -13,8 +13,8 @@
 </head>
 
 <body>
-    <div id="wrapper" class="">
-        <div id="loader" class="fh" x-data x-show="$store.navigate.to !== null">
+    <div id="wrapper" class="animsition">
+        <div id="loader" class="fh">
             <section class="vcenter">
                 <div class="container">
                     <div class="indicator"> <span class="number">0</span><span class="unit">%</span>
@@ -22,7 +22,7 @@
                             <div class="inner"></div>
                         </div>
                     </div>
-                    <div class="img-count"><span class="loaded"></span><span class="description"></span></div>
+                    <div class="img-count"><span class="loaded"></span><span class="description">images loaded</span></div>
                 </div>
             </section>
         </div>
@@ -37,22 +37,22 @@
                         </div>
                         <ul class="nav-links">
                             <li class="col-1 brand">
-                                <a wire:navigate href="{{ route('landing') }}"><img alt="Peel" src="images/logo.svg" class="default">
+                                <a href="{{ route('landing') }}"><img alt="Peel" src="images/logo.svg" class="default">
                                 </a>
                             </li>
                             <li class="col-1">
-                                <a wire:navigate href="{{ route('about') }}" class="nav-link {{ Route::is('about') ? 'active' : '' }}">
+                                <a href="{{ route('about') }}" class="nav-link {{ Route::is('about') ? 'active' : '' }}">
                                     About
                                 </a>
                             </li>
                             <li class="col-1 col-offset-1">
-                                <a wire:navigate href="{{ route('portfolio') }}" class="nav-link {{ Route::is('portfolio') ? 'active' : '' }}">Portfolio</a>
+                                <a href="{{ route('portfolio') }}" class="nav-link {{ Route::is('portfolio') ? 'active' : '' }}">Portfolio</a>
                             </li>
                             <li class="col-1 col-offset-1">
-                                <a wire:navigate href="{{ route('blog') }}" class="nav-link {{ Route::is('blog') ? 'active' : '' }}">Journal</a>
+                                <a href="{{ route('blog') }}" class="nav-link {{ Route::is('blog') ? 'active' : '' }}">Journal</a>
                             </li>
                             <li class="col-1 col-offset-1">
-                                <a wire:navigate href="{{ route('contact') }}" class="nav-link {{ Route::is('contact') ? 'active' : '' }}">Contact</a>
+                                <a href="{{ route('contact') }}" class="nav-link {{ Route::is('contact') ? 'active' : '' }}">Contact</a>
                             </li>
                         </ul>
                     </nav>
@@ -68,8 +68,14 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.js"></script>
 
+    <script src="{{ asset('js/template/vendor.js') }}"></script>
+    <script src="{{ asset('js/template/img-scroller/img-scroller.js') }}"></script>
+    <script src="{{ asset('js/template/tera-lightbox/tera-lightbox.js') }}"></script>
+    <script src="{{ asset('js/template/titan-slider/titan-slider.js') }}"></script>
+    <script src="{{ asset('js/template/functions.js') }}"></script>
+
     @vite([
-    'resources/js/app.js',
+        'resources/js/app.js',
     ])
 
     @stack('js')

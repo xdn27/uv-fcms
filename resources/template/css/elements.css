@@ -1189,19 +1189,19 @@ Made by Themanoid
 }
 
 .titanSlider.next {
-  cursor: url("/modules/titan-slider/slide-right.png") 5 -25, e-resize;
+  cursor: url("/js/template/titan-slider/slide-right.png") 5 -25, e-resize;
 }
 
 .titanSlider.next.dark {
-  cursor: url("/modules/titan-slider/slide-right-dark.png") 5 -25, e-resize;
+  cursor: url("/js/template/titan-slider/slide-right-dark.png") 5 -25, e-resize;
 }
 
 .titanSlider.previous {
-  cursor: url("/modules/titan-slider/slide-left.png") 5 -25, w-resize;
+  cursor: url("/js/template/titan-slider/slide-left.png") 5 -25, w-resize;
 }
 
 .titanSlider.previous.dark {
-  cursor: url("/modules/titan-slider/slide-left-dark.png") 5 -25, w-resize;
+  cursor: url("/js/template/titan-slider/slide-left-dark.png") 5 -25, w-resize;
 }
 
 .titanSlider.fw {

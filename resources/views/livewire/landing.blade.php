@@ -63,3 +63,13 @@
         </div>
     </section>
 </div>
+
+@script
+<script>
+$('#home-slider').titanSlider();
+</script>
+@endscript
+
+@push('js')
+
+@endpush
