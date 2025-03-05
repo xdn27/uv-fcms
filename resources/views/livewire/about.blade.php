@@ -17,7 +17,15 @@
         <section class="mb-xl">
             <div class="container">
                 <div class="grid">
+                    @if(isset($data['body_json']['left']) && !empty($data['body_json']['left']))
                     <div class="col-3">
+
+                        @foreach($data['body_json']['left'] as $block)
+                            @if(view()->exists('components/block/'.$block['type']))
+                                <x-dynamic-component :component="'block.'.$block['type']" :data="$block['data']" />
+                            @endif
+                        @endforeach
+
                         <div class="content-block">
                             <h2>Made in the highlands of Scotland, raised in London</h2>
                             <p>Businesses often become known today through effective marketing. The marketing may be in the form of a regular news item or half column society news in the Sunday newspaper. The marketing may be in the form of a heart to heart talk with Mr. Brown on his prominent local television show. </p>
@@ -54,6 +62,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="col-2 col-offset-1">
                         <div class="list-block">
                             <h3 class="stripe">Publications</h3><span class="label">2016</span>
