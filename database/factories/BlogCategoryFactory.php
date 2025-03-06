@@ -17,7 +17,8 @@ class BlogCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'is_published' => 1,
+            'type' => 'post'
         ];
     }
 }

@@ -10,9 +10,9 @@
                         <nav id="filters">
                             <ul class="filters">
                                 <li> <a href="#" data-filter="grid-item" class="active filter">All</a></li>
-                                <li><a href="#" data-filter="identity" class="filter">Visual Identity</a></li>
-                                <li><a href="#" data-filter="product-design" class="filter">Product Design</a></li>
-                                <li><a href="#" data-filter="photography" class="filter">Photography</a></li>
+                                @foreach($categories as $category)
+                                <li><a href="#" data-filter="{{$category->slug}}" class="filter">{{$category->title}}</a></li>
+                                @endforeach
                             </ul>
                         </nav>
                     </div>

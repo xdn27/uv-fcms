@@ -7,11 +7,20 @@ use Livewire\Component;
 
 class About extends Component
 {
+    public $data;
+
+    public function mount()
+    {
+        $this->data = Page::where('slug', 'about')->first();    
+        if(empty($data)){
+            abort(404);
+        }    
+    }
+
     public function render()
     {
-        $data = Page::where('slug', 'about')->first();
         return view('livewire.about', [
-            'data' => $data
+            'data' => $this->data
         ]);
     }
 }
