@@ -9,6 +9,7 @@ use App\Filament\Resources\PageResource\RelationManagers;
 use App\Models\Page;
 use Filament\Forms;
 use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
@@ -32,20 +33,27 @@ class PageResource extends Resource
     {
         return $form
             ->schema([
-                Hidden::make('user_id')->default(auth()->id()),
                 Section::make([
+                    Hidden::make('user_id')->default(auth()->id()),
                     TextInput::make('title'),
-                    TextInput::make('slug'),
+                    FileUpload::make('banner')
+                        ->image()
+                        ->imageEditor()
+                        ->directory('page')
+                        ->optimize('webp'),
+                ])->columnSpan(8),
+                Section::make([
                     Toggle::make('is_published')->label('Publish'),
-                ])->columns(2),
+                    TextInput::make('slug'),
+                ])->columnSpan(4),
                 Section::make([
                     Grid::make(3)->schema([
                         Builder::make('body_json.left')->blocks(BlockSchema::getList())->label(''),
-                        Builder::make('body_json.middle')->blocks([])->label(''),
-                        Builder::make('body_json.right')->blocks([])->label('')
+                        Builder::make('body_json.middle')->blocks(BlockSchema::getList())->label(''),
+                        Builder::make('body_json.right')->blocks(BlockSchema::getList())->label('')
                     ])
                 ])
-            ])->columns(1);
+            ])->columns(12);
     }
 
     public static function table(Table $table): Table
