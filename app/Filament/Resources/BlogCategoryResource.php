@@ -5,8 +5,10 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BlogCategoryResource\Pages;
 use App\Filament\Resources\BlogCategoryResource\RelationManagers;
 use App\Models\BlogCategory;
+use App\Models\BlogPostType;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -33,6 +35,10 @@ class BlogCategoryResource extends Resource
             ->schema([
                 TextInput::make('title')->required(),
                 TextInput::make('slug')->required(),
+                Select::make('type')
+                    ->required()
+                    ->options(BlogPostType::where('is_active', 1)->pluck('name', 'id'))
+                    ->default(fn() => BlogPostType::where('is_default', 1)->first()->id),
                 FileUpload::make('banner')
                     ->image()
                     ->imageEditor()

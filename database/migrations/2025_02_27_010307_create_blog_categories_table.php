@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('blog_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('type', 100)->default('post');
             $table->string('title');
             $table->string('slug', 100)->unique();
             $table->string('banner')->nullable();

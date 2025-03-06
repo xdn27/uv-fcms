@@ -23,7 +23,7 @@ class BlogPostMetaTemplateResource extends Resource
     protected static ?string $model = BlogPostMetaTemplate::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Blogging';
+    protected static ?string $navigationGroup = 'Other';
     protected static ?int $navigationSort = 101;
     public static ?string $label = 'Meta Templates';
 
