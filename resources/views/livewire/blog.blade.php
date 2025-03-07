@@ -19,71 +19,20 @@
                 </div>
             </div>
             <div class="container">
-                <div id="journal-grid" class="masonry-grid"><a href="journal-single.html" class="identity grid-item col-4">
+                <div id="journal-grid" class="masonry-grid">
+                    @forelse($entries as $post)
+                    <a href="journal-single.html" class="{{ implode(' ', $post->categories->pluck('slug')->toArray()) }} grid-item col-4">
                         <div class="thumb">
-                            <div class="post-date">17 / 01 / 17</div><img src="images/journal/thumb-05.png">
+                            <div class="post-date">{{ $post->post_at->format('d / m / Y') }}</div><img src="{{ asset('storage/'.$post->banner) }}">
                         </div>
                         <div class="caption">
-                            <div class="title">Be productive while relaxing</div>
-                            <div class="subtitle">By Ian Vicknair</div>
-                        </div>
-                    </a><a href="journal-single.html" class="retouching grid-item col-4">
-                        <div class="thumb">
-                            <div class="post-date">16 / 01 / 17</div><img src="images/journal/thumb-07.png">
-                        </div>
-                        <div class="caption">
-                            <div class="title">The first 365 days of an Art Director</div>
-                            <div class="subtitle">By Ian Vicknair</div>
-                        </div>
-                    </a><a href="journal-single.html" class="identity grid-item col-4">
-                        <div class="thumb">
-                            <div class="post-date">15 / 01 / 17</div><img src="images/journal/thumb-06.png">
-                        </div>
-                        <div class="caption">
-                            <div class="title">Definitive guide to finishing a project</div>
-                            <div class="subtitle">By Michael Jordan</div>
-                        </div>
-                    </a><a href="journal-single.html" class="retouching grid-item col-4">
-                        <div class="thumb">
-                            <div class="post-date">14 / 01 / 17</div><img src="images/journal/thumb-08.png">
-                        </div>
-                        <div class="caption">
-                            <div class="title">Relax! It is not your fault</div>
-                            <div class="subtitle">By Ian Vicknair</div>
-                        </div>
-                    </a><a href="journal-single.html" class="identity grid-item col-4">
-                        <div class="thumb">
-                            <div class="post-date">13 / 01 / 17</div><img src="images/journal/thumb-02.png">
-                        </div>
-                        <div class="caption">
-                            <div class="title">7 Signs of great design</div>
-                            <div class="subtitle">By John Doe</div>
-                        </div>
-                    </a><a href="journal-single.html" class="retouching grid-item col-4">
-                        <div class="thumb">
-                            <div class="post-date">12 / 01 / 17</div><img src="images/journal/thumb-03.png">
-                        </div>
-                        <div class="caption">
-                            <div class="title">Rules for a perfect workflow</div>
-                            <div class="subtitle">By Henry Peel</div>
-                        </div>
-                    </a><a href="journal-single.html" class="product-design grid-item col-4">
-                        <div class="thumb">
-                            <div class="post-date">11 / 01 / 17</div><img src="images/journal/thumb-04.png">
-                        </div>
-                        <div class="caption">
-                            <div class="title">The making of Peel in 3 days</div>
-                            <div class="subtitle">By Ian Vicknair</div>
-                        </div>
-                    </a><a href="journal-single.html" class="retouching grid-item col-4">
-                        <div class="thumb">
-                            <div class="post-date">10 / 01 / 17</div><img src="images/journal/thumb-08.png">
-                        </div>
-                        <div class="caption">
-                            <div class="title">Relax! It is not your fault</div>
-                            <div class="subtitle">By Ian Vicknair</div>
+                            <div class="title">{{ $post->title }}</div>
+                            <div class="subtitle">By {{ $post->author->name }}</div>
                         </div>
                     </a>
+                    @empty
+
+                    @endforelse
                 </div>
             </div>
         </section>

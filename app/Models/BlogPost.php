@@ -30,7 +30,8 @@ class BlogPost extends Model
     protected $casts = [
         'is_published' => 'boolean',
         'body_json' => 'array',
-        'metas' => 'array'
+        'metas' => 'array',
+        'post_at' => 'date'
     ];
 
     public $metas;
@@ -51,5 +52,20 @@ class BlogPost extends Model
     public function postMeta(): HasMany
     {
         return $this->hasMany(BlogPostMeta::class, 'post_id', 'id');
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', 1);
+    }
+
+    public function scopeType($query, $type)
+    {
+        return $query->where('type', $type);
     }
 }

@@ -3,10 +3,14 @@
 namespace App\Livewire;
 
 use App\Models\BlogCategory;
+use App\Models\BlogPost;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Blog extends Component
 {
+    use WithPagination;
+    
     public $categories = [];
 
     public function mount()
@@ -16,8 +20,10 @@ class Blog extends Component
 
     public function render()
     {
+        $entries = BlogPost::type('post')->published()->paginate(10);
         return view('livewire.blog', [
-            'categories' => $this->categories
+            'categories' => $this->categories,
+            'entries' => $entries
         ]);
     }
 }

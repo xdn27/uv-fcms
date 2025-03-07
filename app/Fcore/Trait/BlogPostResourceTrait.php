@@ -32,6 +32,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
@@ -65,7 +66,6 @@ trait BlogPostResourceTrait
                     Hidden::make('user_id')->default(auth()->id()),
                     TextInput::make('title')
                         ->required()
-                        ->default('Test')
                         ->live(onBlur: true)
                         ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                     Textarea::make('summary')
@@ -191,6 +191,8 @@ trait BlogPostResourceTrait
                         FileUpload::make('banner')
                             ->image()
                             ->imageEditor()
+                            ->optimize('webp')
+                            ->directory('post')
                             ->columnSpanFull(),
                     ])
                 ])->columnSpan(4)
@@ -235,5 +237,10 @@ trait BlogPostResourceTrait
             'view' => Pages\ViewBlogPost::route('/{record}'),
             'edit' => Pages\EditBlogPost::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): EloquentBuilder
+    {
+        return parent::getEloquentQuery()->where('type', self::type());
     }
 }
