@@ -2,6 +2,7 @@
 
 namespace App\Fcore\Trait;
 
+use App\Fcore\Class\BlockSchema;
 use App\Filament\Resources\BlogPostResource\Pages;
 use App\Filament\Resources\BlogPostResource\RelationManagers;
 use App\Models\BlogCategory;
@@ -104,6 +105,7 @@ trait BlogPostResourceTrait
                     Builder::make('body_json')
                         ->label('Content')
                         ->default(null)
+                        ->blocks(BlockSchema::getList())
                         ->columnSpanFull()
                         ->hidden(fn(Get $get): bool => $get('is_using_builder') != true),
                 ])->columnSpan(8),

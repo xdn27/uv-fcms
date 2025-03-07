@@ -20,7 +20,7 @@ class Blog extends Component
 
     public function render()
     {
-        $entries = BlogPost::type('post')->published()->paginate(10);
+        $entries = BlogPost::type('post')->published()->orderBy('post_at', 'desc')->paginate(10);
         return view('livewire.blog', [
             'categories' => $this->categories,
             'entries' => $entries

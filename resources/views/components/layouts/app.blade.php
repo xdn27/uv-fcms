@@ -37,7 +37,7 @@
                         </div>
                         <ul class="nav-links">
                             <li class="col-1 brand">
-                                <a href="{{ route('landing') }}"><img alt="Peel" src="images/logo.svg" class="default">
+                                <a href="{{ route('landing') }}"><img alt="Peel" src="{{ asset('images/logo.svg') }}" class="default">
                                 </a>
                             </li>
                             <li class="col-1">
