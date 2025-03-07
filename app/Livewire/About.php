@@ -12,7 +12,7 @@ class About extends Component
     public function mount()
     {
         $this->data = Page::where('slug', 'about')->first();    
-        if(empty($data)){
+        if(empty($this->data)){
             abort(404);
         }    
     }

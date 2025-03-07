@@ -15,26 +15,11 @@ class DemoSeeder extends Seeder
      */
     public function run(): void
     {
-        BlogCategory::truncate();
-        for($i=0; $i<10; $i++){
-            $title = fake('id')->unique()->safeColorName();
-            BlogCategory::factory()->create([
-                'title' => ucwords($title),
-                'slug' => Str::slug($title),
-                'is_published' => 1
-            ]);
-        }
-
-        BlogPostMetaTemplate::truncate();
-        BlogPostMetaTemplate::factory()->create([
-            'name' => 'Portfolio',
-            'post_type' => 'portfolio',
-            'meta' => [
-                'Directory' => '',
-                'Year' => '',
-                'Type' => '',
-                'Agency' => ''
-            ]
+        $this->call([
+            SettingSeeder::class,
+            BlogPostMetaTemplateSeeder::class,
+            PageSeeder::class,
+            BlogCategorySeeder::class
         ]);
     }
 }
