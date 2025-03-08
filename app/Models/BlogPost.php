@@ -49,6 +49,11 @@ class BlogPost extends Model
         return $this->belongsToMany(BlogCategory::class, app(BlogPostCategory::class)->getTable());
     }
 
+    public function stringCategory($column = 'title', $separtor = ', '): string
+    {
+        return $this->categories->pluck($column)->implode($separtor);
+    }
+
     public function postMeta(): HasMany
     {
         return $this->hasMany(BlogPostMeta::class, 'post_id', 'id');

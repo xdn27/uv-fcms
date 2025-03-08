@@ -21,7 +21,7 @@
             <div class="container">
                 <div id="journal-grid" class="masonry-grid">
                     @forelse($entries as $post)
-                    <a href="{{ route('blog_detail', ['slug' => $post->slug]) }}" class="{{ implode(' ', $post->categories->pluck('slug')->toArray()) }} grid-item col-4">
+                    <a href="{{ route('blog_detail', ['slug' => $post->slug]) }}" class="{{$post->stringCategory('slug', ' ')}} grid-item col-4">
                         <div class="thumb">
                             <div class="post-date">{{ $post->post_at->format('d / m / Y') }}</div><img src="{{ asset('storage/'.$post->banner) }}">
                         </div>
