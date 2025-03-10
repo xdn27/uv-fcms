@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Landing::class)->name('landing');
 Route::get('/about', About::class)->name('about');
 Route::get('/portfolio', Portfolio::class)->name('portfolio');
+Route::get('/portfolio/{slug}', \App\Livewire\PortfolioDetail::class)->name('portfolio_detail');
 Route::get('/journal', Blog::class)->name('blog');
 Route::get('/journal/{slug}', BlogDetail::class)->name('blog_detail');
 Route::get('/contact', Contact::class)->name('contact');

@@ -21,7 +21,7 @@
             <div class="container">
                 <div id="project-grid" class="masonry-grid">
                     @forelse($entries as $post)
-                    <a href="project-single.html" class="{{$post->stringCategory('slug', ' ')}} grid-item col-2">
+                    <a href="{{ route('portfolio_detail', ['slug' => $post->slug]) }}" class="{{$post->stringCategory('slug', ' ')}} grid-item col-2">
                         <div class="thumb"><img src="{{ asset('storage/'.$post->banner) }}"></div>
                         <div class="caption">
                             <div class="title">{{$post->title}}</div>
@@ -29,6 +29,9 @@
                         </div>
                     </a>
                     @empty
+                    <div class="mt-xl mb-lg">
+                        No portfolio published
+                    </div>
                     @endforelse
                 </div>
             </div>

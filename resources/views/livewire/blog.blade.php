@@ -31,7 +31,9 @@
                         </div>
                     </a>
                     @empty
-
+                        <div class="mt-xl mb-lg">
+                            No journal published
+                        </div>
                     @endforelse
                 </div>
             </div>
