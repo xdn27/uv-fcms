@@ -23,7 +23,10 @@
                     @forelse($entries as $post)
                     <a href="{{ route('blog_detail', ['slug' => $post->slug]) }}" class="{{$post->stringCategory('slug', ' ')}} grid-item col-4">
                         <div class="thumb">
-                            <div class="post-date">{{ $post->post_at->format('d / m / Y') }}</div><img src="{{ asset('storage/'.$post->banner) }}">
+                            <div class="post-date">{{ $post->post_at->format('d / m / Y') }}</div>
+                            <div class="tw:h-80 tw:w-full tw:overflow-hidden">
+                                <img class="tw:object-center" src="{{ asset('storage/'.$post->banner) }}">
+                            </div>
                         </div>
                         <div class="caption">
                             <div class="title">{{ $post->title }}</div>

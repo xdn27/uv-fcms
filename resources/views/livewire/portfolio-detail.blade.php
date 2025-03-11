@@ -127,16 +127,24 @@
             <div class="container">
                 <div class="grid content">
                     <div class="col-4">
-                        <div class="vcenter link-container"><a href="project-single.html" class="prev-link">
-                                <div class="project-title">The Vault</div>
-                                <div class="link-title">Previous project</div>
+                        @if($prev)
+                        <div class="vcenter link-container"><a href="{{ route('portfolio_detail', ['slug' => $prev->slug]) }}" class="prev-link">
+                                <div class="project-title">{{ $prev->title }}</div>
+                                <div class="link-title">Previous</div>
                             </a></div>
+                        @else
+                        &nbsp;
+                        @endif
                     </div>
                     <div class="col-4">
-                        <div class="vcenter link-container text-right"><a href="project-single.html" class="next-link">
-                                <div class="project-title">Wakey Wakey</div>
-                                <div class="link-title">Next project</div>
+                        @if($next)
+                        <div class="vcenter link-container text-right"><a href="{{ route('portfolio_detail', ['slug' => $next->slug]) }}" class="next-link">
+                                <div class="project-title">{{ $next->title }}</div>
+                                <div class="link-title">Next</div>
                             </a></div>
+                        @else
+                        &nbsp;
+                        @endif
                     </div>
                 </div>
             </div>

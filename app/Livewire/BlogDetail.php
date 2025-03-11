@@ -18,8 +18,8 @@ class BlogDetail extends Component
             abort(404);
         }
 
-        $this->prev = BlogPost::select('title', 'slug')->type('post')->published()->where('post_at', '<', $this->post->post_at)->orderBy('post_at', 'desc')->first();
-        $this->next = BlogPost::select('title', 'slug')->type('post')->published()->where('post_at', '>=', $this->post->post_at)->orderBy('post_at', 'asc')->first();
+        $this->prev = BlogPost::select('title', 'slug')->type('post')->published()->whereNot('slug', $slug)->where('post_at', '<', $this->post->post_at)->orderBy('post_at', 'desc')->first();
+        $this->next = BlogPost::select('title', 'slug')->type('post')->published()->whereNot('slug', $slug)->where('post_at', '>=', $this->post->post_at)->orderBy('post_at', 'asc')->first();
     }
 
     public function render()

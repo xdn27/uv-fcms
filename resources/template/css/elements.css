@@ -829,8 +829,8 @@ ul.comments li.comment ul.comments li.comment .comment-body p {
 }
 
 .thumb img {
-  width: 100%;
-  display: inline-block;
+  /* width: 100%; */
+  /* display: inline-block; */
   vertical-align: top;
   transition: all 1s;
 }
