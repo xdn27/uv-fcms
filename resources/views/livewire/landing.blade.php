@@ -13,7 +13,7 @@
                                     <div class="col-1">{{ $post->post_at->format('Y') }}</div>
                                     <div class="col-7">
                                         <div class="label">{{ $post->post_at->format('F') }}</div><a href="{{ route('portfolio_detail', ['slug' => $post->slug]) }}" class="project-link">
-                                            <h1 class="stripe animatedText">{{ $post->title }}</h1>
+                                            <h1 class="stripe animatedText tw:font-bold">{{ $post->title }}</h1>
                                         </a>
                                         @foreach($post->categories ?? [] as $category)
                                         <div class="label">{{ $category->title }}</div>

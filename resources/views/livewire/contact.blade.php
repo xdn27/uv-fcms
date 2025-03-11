@@ -4,6 +4,11 @@
             <div style="background-image: url(images/contact/01.jpg);" class="bg faded"></div>
             <div class="vbottom desktop fh">
                 <div class="container">
+                    @if(isset($success) && !empty($success))
+                    <div class="mb-lg tw:border tw:p-5">
+                        {{ $success }}
+                    </div>
+                    @endif
                     <div class="grid mb-xl">
                         <div class="col-4">
                             <h3 class="mt-0">Let's create</h3>

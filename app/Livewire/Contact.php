@@ -12,21 +12,28 @@ class Contact extends Component
     public $email;
     public $message;
 
+    public $success;
+
     public function submit()
     {
-        sleep(10);
-        
         $this->validate([
             'name' => 'required',
             'email' => 'required|email',
             'message' => 'required'
         ]);
 
-        ModelsContact::create([
+        $saved = ModelsContact::create([
             'name' => $this->name,
             'email' => $this->email,
             'message' => $this->message
         ]);
+
+        if($saved){
+            $this->success = 'Your message has been sent.';
+            $this->name = '';
+            $this->email = '';
+            $this->message = '';
+        }
     }
 
     public function render()

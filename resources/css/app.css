@@ -1,6 +1,10 @@
-/* @import "tailwindcss";
-@source "../views"; */
+@import "tailwindcss" prefix(tw);
+@source "../views";
 
 @import "../template/css/core.css";
 @import "../template/css/animsition.min.css";
 @import "../template/css/elements.css";
+
+@theme {
+    --font-display: "HK Grotesk"; 
+}
