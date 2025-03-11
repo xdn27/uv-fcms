@@ -21,14 +21,6 @@ class SettingSeeder extends Seeder
         ]);
 
         Setting::factory()->create([
-            'code' => 'favicon',
-            'label' => 'Favicon',
-            'content' => '',
-            'group' => 'site',
-            'type' => 'image'
-        ]);
-
-        Setting::factory()->create([
             'code' => 'logo',
             'label' => 'Logo',
             'content' => '',
@@ -37,38 +29,60 @@ class SettingSeeder extends Seeder
         ]);
 
         Setting::factory()->create([
-            'code' => 'mail_host',
-            'label' => 'Mail Host',
-            'content' => '127.0.0.1',
-            'group' => 'mail'
+            'code' => 'favicon',
+            'label' => 'Favicon',
+            'content' => '',
+            'group' => 'site',
+            'type' => 'image'
         ]);
 
         Setting::factory()->create([
-            'code' => 'mail_username',
-            'label' => 'Mail Username',
+            'code' => 'contact_email',
+            'label' => 'Contact Email',
             'content' => '',
-            'group' => 'mail'
+            'group' => 'contact',
         ]);
 
         Setting::factory()->create([
-            'code' => 'mail_password',
-            'label' => 'Mail Password',
+            'code' => 'contact_phone',
+            'label' => 'Contact Phone',
             'content' => '',
-            'group' => 'mail'
+            'group' => 'contact',
         ]);
 
-        Setting::factory()->create([
-            'code' => 'mail_from_address',
-            'label' => 'Mail From Address',
-            'content' => '',
-            'group' => 'mail'
-        ]);
+        // Setting::factory()->create([
+        //     'code' => 'mail_host',
+        //     'label' => 'Mail Host',
+        //     'content' => '127.0.0.1',
+        //     'group' => 'mail'
+        // ]);
 
-        Setting::factory()->create([
-            'code' => 'mail_from_name',
-            'label' => 'Mail From NAme',
-            'content' => '',
-            'group' => 'mail'
-        ]);
+        // Setting::factory()->create([
+        //     'code' => 'mail_username',
+        //     'label' => 'Mail Username',
+        //     'content' => '',
+        //     'group' => 'mail'
+        // ]);
+
+        // Setting::factory()->create([
+        //     'code' => 'mail_password',
+        //     'label' => 'Mail Password',
+        //     'content' => '',
+        //     'group' => 'mail'
+        // ]);
+
+        // Setting::factory()->create([
+        //     'code' => 'mail_from_address',
+        //     'label' => 'Mail From Address',
+        //     'content' => '',
+        //     'group' => 'mail'
+        // ]);
+
+        // Setting::factory()->create([
+        //     'code' => 'mail_from_name',
+        //     'label' => 'Mail From NAme',
+        //     'content' => '',
+        //     'group' => 'mail'
+        // ]);
     }
 }
