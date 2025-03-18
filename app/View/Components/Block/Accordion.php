@@ -2,14 +2,16 @@
 
 namespace App\View\Components\Block;
 
+use App\Fcore\Class\BlockSchema;
 use App\Fcore\Interface\FilamentBlockComponent;
 use Closure;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Text extends Component implements FilamentBlockComponent
+class Accordion extends Component implements FilamentBlockComponent
 {
     /**
      * Create a new component instance.
@@ -22,11 +24,10 @@ class Text extends Component implements FilamentBlockComponent
     public function schema()
     {
         return [
-            Select::make('type')->options([
-                'center' => 'Center',
-                'justiry' => 'Justify'
-            ])->default('center'),
-            Textarea::make('text')->rows(5)
+            Repeater::make('accordion')->schema([
+                TextInput::make('title')->required(),
+                Builder::make('block')->blocks(BlockSchema::getListExcept(['Accordion', 'Container']))
+            ])
         ];
     }
 
@@ -35,6 +36,6 @@ class Text extends Component implements FilamentBlockComponent
      */
     public function render(): View|Closure|string
     {
-        return view('components.block.text');
+        return view('components.block.accordion');
     }
 }

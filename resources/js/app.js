@@ -14,3 +14,5 @@ document.addEventListener('livewire:navigated', event => {
     Alpine.store('navigate').loading = false;
     Alpine.store('navigate').to = null;
 });
+
+$('#img-carousel').titanSlider({carousel : true, autoplay : true});
