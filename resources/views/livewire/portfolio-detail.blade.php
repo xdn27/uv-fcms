@@ -16,29 +16,12 @@
                 </div>
             </div>
         </section>
-        
 
         @if($post->is_using_builder)
             @blocks($post->body_json)
         @else
             {!! $post->body_html !!}
-        @endif  
-                
-        <section class="mb-xl">
-            <div class="container">
-                <div class="grid content">
-                    <div id="img-carousel" class="titanSlider">
-                        <ul class="slides">
-                            <li class="slide"><img src="{{ asset('images/projects/thumb-01-wide.jpg') }}" class="fw"></li>
-                            <li class="slide"><img src="{{ asset('images/projects/thumb-02-wide.jpg') }}" class="fw"></li>
-                            <li class="slide"><img src="{{ asset('images/projects/thumb-03-wide.jpg') }}" class="fw"></li>
-                            <li class="slide"><img src="{{ asset('images/projects/thumb-05-wide.jpg') }}" class="fw"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        @endif
 
         <section class="prev-next-container mb-xl">
             <div class="container">

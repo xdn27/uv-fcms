@@ -8,3 +8,12 @@
 @theme {
     --font-display: "HK Grotesk"; 
 }
+
+.titanThumbContainer > li{
+    height: 100px;
+    overflow: hidden;
+}
+
+.titanThumbContainer > li > img{
+
+}
