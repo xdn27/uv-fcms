@@ -6,9 +6,11 @@ use App\Filament\Resources\ContactResource\Pages;
 use App\Filament\Resources\ContactResource\RelationManagers;
 use App\Models\Contact;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +25,8 @@ class ContactResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('email'),
+                TextInput::make('name')
             ]);
     }
 
@@ -31,7 +34,8 @@ class ContactResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('email')->searchable()->sortable(),
+                TextColumn::make('name')->searchable()->sortable()
             ])
             ->filters([
                 //

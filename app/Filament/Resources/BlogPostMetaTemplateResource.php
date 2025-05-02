@@ -25,6 +25,7 @@ class BlogPostMetaTemplateResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Other';
     protected static ?int $navigationSort = 101;
+    protected static bool $shouldRegisterNavigation = false;
     public static ?string $label = 'Meta Templates';
 
     public static function form(Form $form): Form

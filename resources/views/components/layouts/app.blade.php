@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div id="wrapper" class="animsition">
+    <div id="wrapper" class="animsition tw:overflow-x-hidden">
         <div id="loader" class="fh">
             <section class="vcenter">
                 <div class="container">

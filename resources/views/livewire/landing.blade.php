@@ -30,6 +30,10 @@
             </ul>
         </div>
     </section>
+
+    <section class="tw:h-[500px] tw:bg-red-500">
+
+    </section>
 </div>
 
 @script
