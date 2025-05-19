@@ -1205,7 +1205,9 @@ Made by Themanoid
 }
 
 .titanSlider.fw {
-  width: 100vw;
+  /* width: auto; */
+  /* width: 100vw; */
+  width: 100%;
 }
 
 .titanSlider.fh {

@@ -7,13 +7,15 @@
 
     <title>{{ $title ?? 'Luthfi Fariz' }}</title>
 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css'])
     @endif
 </head>
 
 <body>
-    <div id="wrapper" class="animsition tw:overflow-x-hidden">
+    <div id="wrapper" class="animsition">
         <div id="loader" class="fh">
             <section class="vcenter">
                 <div class="container">
@@ -30,11 +32,12 @@
         {{ $slot }}
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js" integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js" integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script src="{{ asset('js/template/vendor.js') }}"></script>
     <script src="{{ asset('js/template/img-scroller/img-scroller.js') }}"></script>
@@ -43,7 +46,7 @@
     <script src="{{ asset('js/template/functions.js') }}"></script>
 
     @vite([
-    'resources/js/app.js',
+        'resources/js/app.js',
     ])
 
     @stack('js')

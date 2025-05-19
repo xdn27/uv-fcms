@@ -35,7 +35,17 @@
 
   // The trigger function
   function scrollTrigger(){
+
+    if(scroller.length == 0){
+      return;
+    }
+
     var newItem = scroller.find('li:nth-child('+scrollIndex+')');
+
+    if(newItem.length == 0){
+      return;
+    }
+
     newItem.addClass('active').siblings().removeClass('active');
     scroller.animate({
       scrollTop: newItem.offset().top - scroller.offset().top + scroller.scrollTop()

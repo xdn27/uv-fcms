@@ -308,9 +308,9 @@
     responsiveMenu();
 
     if($(window).width() > 949){
-      var parallaxHeader = new ScrollMagic.Scene({ triggerElement: $('#main-header'), offset: 0, duration: 200, triggerHook: 'onLeave'})
-          .setTween("#main-header", .5, {opacity: 0, y: 10, ease:Linear.ease})
-          .addTo(controller);
+      var scene = new ScrollMagic.Scene({triggerElement: document.getElementById('main-header'), offset: 0, duration: 200, triggerHook: 'onLeave'});
+      scene.setTween("#main-header", .5, {opacity: 0, y: 10, ease:Linear.ease});
+      scene.addTo(controller);
     }
 
   // Kick off one resize to fix all videos on page load
