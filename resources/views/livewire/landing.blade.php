@@ -65,20 +65,18 @@
         </div>
     </section>
 
-    {{-- 
-        <div class="">
-            <div class="swiper project-swiper">
-                <div class="swiper-wrapper">
-                    @for($i = 0; $i < 10; $i++)
-                        <div class="swiper-slide tw:w-[615px]! tw:h-[615px]! tw:flex-shrink-0! tw:bg-slate-300">
-                            <img src="https://picsum.photos/615?random={{ $i }}" class="tw:w-full tw:h-full tw:object-cover"/>
-                        </div>
-                    @endfor
-                </div>
-                <div class="swiper-pagination"></div>
+    <div class="">
+        <div class="swiper project-swiper">
+            <div class="swiper-wrapper">
+                @for($i = 0; $i < 6; $i++)
+                    <div class="swiper-slide">
+                        <img src="https://placehold.co/700" class="tw:w-full tw:h-full tw:object-cover"/>
+                    </div>
+                @endfor
             </div>
+            <div class="swiper-pagination"></div>
         </div>
-    --}}
+    </div>
 
     <section class="tw:bg-black tw:pt-24 tw:pb-12">
         <div class="container tw:mx-auto">
@@ -147,16 +145,90 @@
             </div>
         </div>
     </section>
+
+    <section class="tw:bg-black tw:pt-24 tw:pb-12">
+        <div class="container tw:mx-auto">
+            <div class="">
+                <div class="tw:grid tw:grid-cols-12 tw:gap-10">
+                    <div class="tw:col-span-12 tw:lg:col-span-5 tw:flex tw:flex-col tw:justify-between">
+                        <div class="tw:mb-12 tw:text-xl">Journal</div>
+                        <div class="tw:text-6xl tw:uppercase tw:font-bold">
+                            Latest Story, Insight From Our Office
+                        </div>
+                    </div>
+                    <div class="tw:col-span-12 tw:lg:col-span-7 tw:flex tw:flex-col tw:justify-end">
+                        <div class="tw:flex tw:gap-5">
+                            <x-element.button class="tw:flex-grow-1" href="{{ route('portfolio') }}">EXPLORE MORE</x-element.button>
+                            <x-element.button-circle class="tw:flex-shrink-0" href="javascript:void(0)">
+                                <i class="fa fa-chevron-left fa-lg tw:group-hover:text-black!"></i>
+                            </x-element.button-circle>
+                            <x-element.button-circle class="tw:flex-shrink-0" href="javascript:void(0)">
+                                <i class="fa fa-chevron-right fa-lg tw:group-hover:text-black!"></i>
+                            </x-element.button-circle>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="tw:bg-black tw:pb-12">
+        <div class="swiper journal-swiper">
+            <div class="swiper-wrapper">
+                @for($i = 0; $i < 10; $i++)
+                    <div class="swiper-slide">
+                        <div>
+                            <div class="tw:h-64">
+                                <img src="https://picsum.photos/700?random={{ $i }}" class="tw:w-full tw:h-full tw:object-cover"/>
+                            </div>
+                            <div class="tw:text-xl tw:mt-4 tw:mb-2">
+                                <a href="#">How design help us do everyday things</a>
+                            </div>
+                            <div class=" tw:text-gray-500!">
+                                By Someone
+                            </div>
+                        </div>
+                    </div>
+                @endfor
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <section class="tw:bg-black tw:pt-56 tw:pb-56">
+        <div class="container tw:mx-auto">
+            <div class="">
+                <div class="tw:grid tw:grid-cols-12 tw:gap-10 tw:items-start">
+                    <div class="tw:col-span-12 tw:lg:col-span-7 tw:flex tw:flex-col tw:justify-between">
+                        <div class="tw:text-4xl tw:uppercase tw:font-bold">
+                            luthfifarizm@gmail.com<br>+62 812-3456-7890
+                        </div>
+                    </div>
+                    <div class="tw:col-span-12 tw:lg:col-span-5 tw:flex tw:flex-col tw:justify-end">
+                        <div class="tw:text-xl">
+                            We are shaping stellar brands campaign that leave an impact mark
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
 
 @script
 <script>
     $('#home-slider').titanSlider();
 
-    var swiper = new Swiper(".project-swiper", {
-        slidesPerView: 'auto',
+    var swiper = new Swiper('.project-swiper', {
+        slidesPerView: 3,
         spaceBetween: 15,
-        centeredSlides: true,
+        loop: true
+    });
+
+    var swiper = new Swiper('.journal-swiper', {
+        slidesPerView: 4,
+        spaceBetween: 15,
         loop: true
     });
 </script>
